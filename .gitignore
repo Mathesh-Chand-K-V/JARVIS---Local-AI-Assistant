@@ -1,0 +1,5 @@
+.dist
+.build
+.pycache
+.history
+memory.md
