@@ -87,13 +87,11 @@ Monitors:
 ├── config.py
 ├── MEMORY.md
 ├── memory.json
-│
-├── tools/
-│   ├── debug.py
-│   ├── diffusion.py
-│   ├── ocr.py
-│   ├── smart_read.py
-│   └── web.py
+│── debug.py
+│── diffusion.py
+│── ocr.py
+│── smart_read.py
+│── web.py
 │
 └── README.md
 ```
@@ -229,30 +227,6 @@ Dependencies:
 
 - Tesseract
 - Poppler
-
----
-
-## diffusion.py
-
-Stable Diffusion integration.
-
-Capabilities:
-
-- Text-to-image generation
-- Image saving
-- Prompt processing
-
----
-
-## web.py
-
-Web search utility.
-
-Capabilities:
-
-- Search web resources
-- Retrieve information
-- Summarize content
 
 ---
 
