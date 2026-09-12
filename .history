@@ -1,0 +1,23 @@
+hi
+differentiate between threads and light weight processors
+is threads same as the lwp?
+exit
+hi
+how are you?
+bye
+exit
+!gen test.py | write hello world ~ !run test.py
+!gen test.py | write hello world in multiple languages  ~ !run test.py
+!gen test.py | write hello world in multiple spoken languages  ~ !run test.py
+!gen test.py | write hello world in ascci art ~ !run test.py ~!ls~!ls_cache~!
+!gen test.py | write hello world in ascci art ~ !run test.py ~!ls~!ls_cache
+exit
+hi
+!sys cd 'D:/';tree
+exit
+!sys cd 'D:/';tree
+!sys cd 'D:/'; tree
+!sys cd 'D:\'; tree
+!sys cd 'D:\'
+!sys 2+2
+exit

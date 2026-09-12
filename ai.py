@@ -7,26 +7,6 @@ from config import OLLAMA_URL, MODEL, TIMEOUT, STREAM_TIMEOUT
 
 console = Console(width=100)
 
-BASE_SYSTEM_PROMPT = """\
-You are Jarvis, a precise and structured AI assistant.
-Rules:
-- Always respond in clean Markdown
-- Use proper headings (##, ###) and bullet points (-)
-- Keep spacing clean and readable
-- Be concise and technical
-Language:
-- Respond ONLY in English unless user writes in another language
-- Do NOT mix languages
-Accuracy:
-- If unsure, give best-effort answer and note uncertainty
-- Do NOT refuse unless the request is unsafe
-- Correct wrong technical terms before answering
-"""
-
-def build_system_prompt(context=""):
-    base = BASE_SYSTEM_PROMPT.strip()
-    return f"{context.strip()}\n\n{base}" if context.strip() else base
-
 def clean_text(text):
     if not isinstance(text, str):
         return str(text)
@@ -34,7 +14,7 @@ def clean_text(text):
 
 def chat_once(prompt, context=""):
     try:
-        response = requests.post(OLLAMA_URL,json={"model": MODEL,"messages": [{"role": "system", "content": build_system_prompt(context)},{"role": "user",   "content": clean_text(prompt)},],"stream": False,},timeout=TIMEOUT,)
+        response = requests.post(OLLAMA_URL,json={"model": MODEL,"messages": [{"role": "system", "content": context},{"role": "user",   "content": clean_text(prompt)},],"stream": False,},timeout=TIMEOUT,)
         response.raise_for_status()
         return response.json().get("message", {}).get("content", "❌ Empty response")
     except requests.Timeout:
@@ -46,7 +26,7 @@ def chat_once(prompt, context=""):
 
 def stream_from_model(prompt, context=""):
     try:
-        response = requests.post(OLLAMA_URL,json={"model": MODEL,"messages": [{"role": "system", "content": build_system_prompt(context)},{"role": "user",   "content": clean_text(prompt)},],"stream": True,},stream=True,timeout=STREAM_TIMEOUT,)
+        response = requests.post(OLLAMA_URL,json={"model": MODEL,"messages": [{"role": "system", "content":context},{"role": "user",   "content": clean_text(prompt)},],"stream": True,},stream=True,timeout=STREAM_TIMEOUT,)
         response.raise_for_status()
         for line in response.iter_lines():
             if not line:

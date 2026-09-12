@@ -49,10 +49,27 @@ def wait_until_ready():
 
 def load_model():
     print(f"📦 Warming model: {MODEL}")
+    
+    BASE_SYSTEM_PROMPT = """\
+    You are Jarvis, a precise and structured AI assistant.
+    Rules:
+    - Always respond in clean Markdown
+    - Use proper headings (##, ###) and bullet points (-)
+    - Keep spacing clean and readable
+    - Be concise and technical
+    Language:
+    - Respond ONLY in English unless user writes in another language
+    - Do NOT mix languages
+    Accuracy:
+    - If unsure, give best-effort answer and note uncertainty
+    - Do NOT refuse unless the request is unsafe
+    - Correct wrong technical terms before answering
+    """
+
     try:
         requests.post(
             OLLAMA_GENERATE_URL,
-            json={"model": MODEL, "prompt": "hi", "stream": False},
+            json={"model": MODEL, "prompt": "hi"+BASE_SYSTEM_PROMPT, "stream": False},
             timeout=30,
         )
         print("✅ Model warmed")

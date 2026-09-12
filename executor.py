@@ -5,7 +5,6 @@ from files import cache
 
 
 def run_python(file):
-    """Execute a Python file and return output or error."""
     try:
         if file:
             path = Path(FILES_DIR) / file

@@ -37,7 +37,7 @@ def _parse(cmd):
 def _tool(module, fn):
     try:
         import importlib
-        mod = importlib.import_module(f"tools.{module}")
+        mod = importlib.import_module(f"{module}")
         func = getattr(mod, fn, None)
         return func if callable(func) else None
     except (ImportError, AttributeError):
@@ -119,29 +119,6 @@ def route(cmd):
             return "❌ Usage: !sys <command>"
         fn = _tool("system", "run_cmd")
         return fn(" ".join(parts[1:])) if fn else "❌ system.py not found"
-    if command == "!gen-img":
-        if not content:
-            return "❌ Usage: !gen-img | <prompt>"
-        fn = _tool("diffusion", "generate_image")
-        return fn(content) if fn else "❌ diffusion.py not found"
-    if command == "!img2img":
-        if len(parts) < 2 or not content:
-            return "❌ Usage: !img2img <image.png> | <prompt>"
-        fn = _tool("diffusion", "img2img")
-        return fn(parts[1], content) if fn else "❌ diffusion.py not found"
-    if command == "!upscale":
-        if len(parts) < 2:
-            return "❌ Usage: !upscale <image.png>"
-        fn = _tool("diffusion", "upscale")
-        return fn(parts[1]) if fn else "❌ diffusion.py not found"
-    if command == "!sd-model":
-        fn = _tool("diffusion", "current_model")
-        return fn() if fn else "❌ diffusion.py not found"
-    if command == "!switch-model":
-        if len(parts) < 2:
-            return "❌ Usage: !switch-model <model_name>"
-        fn = _tool("diffusion", "switch_model")
-        return fn(parts[1]) if fn else "❌ diffusion.py not found"
     if command.startswith("!"):
         return f"❌ Unknown command: {command}  (type !help)"
     update_memory(cmd_stripped)

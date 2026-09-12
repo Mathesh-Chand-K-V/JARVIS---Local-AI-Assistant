@@ -39,12 +39,6 @@ TOOLS:
   !ocr <file>                  Extract text from image/PDF
   !fetch <url>                 Fetch and clean a web page
   !sys <shell command>         Run a system command
-
-IMAGE GENERATION:
-  !gen-img | <prompt>          Generate image from text
-  !img2img <image> | <prompt>  Modify existing image
-  !upscale <image>             Enhance image resolution
-  !sd-models                   List available models
   
 CHAINING:
   Use ~ to run multiple commands in sequence
@@ -57,10 +51,10 @@ def main():
     ensure_ollama()
     if os.path.exists(HISTORY_FILE):
         try:
-            readline.read_history_file(HISTORY_FILE)
+            readline.read_history_file(HISTORY_FILE) # type: ignore
         except Exception:
             pass
-    readline.set_history_length(1000)
+    readline.set_history_length(1000) # type: ignore
     print("⚡ Jarvis ready  (!help)\n")
     while True:
         try:
@@ -91,7 +85,7 @@ def main():
         except Exception as e:
             print(f"❌ Error: {e}")
     try:
-        readline.write_history_file(HISTORY_FILE)
+        readline.write_history_file(HISTORY_FILE) # type: ignore
     except Exception:
         pass
     print("👋 Bye")
