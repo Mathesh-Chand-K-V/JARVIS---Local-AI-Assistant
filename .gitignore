@@ -1,5 +1,5 @@
-.dist
-.build
-.pycache
+.dist/
+.build/
+.__pycache__/
 .history
 memory.md
